@@ -17,11 +17,16 @@ const setAnAnswer = (state: FormState, action: FormAction<FormActionType.SET_AN_
     return {...state, answers: answers};
 }
 
-const clearAllAnswers = (state: FormState)=>{
-
+const clearAllAnswers = (state: FormState,  action: FormAction<FormActionType.CLEAR_ALL_ANSWERS>)=>{
+    return {...state, answers: {}}
 }
 
-const clearAnAnswer = (state: FormState)=>{
+const clearAnAnswer = (state: FormState, action: FormAction<FormActionType.CLEAR_AN_ANSWER>)=>{
+    const key = action.payload;
+    const answers = _.cloneDeep(state.answers);
+    delete answers?.[key];
+
+    return {...state, answers: {}}
 
 }
 
@@ -32,11 +37,11 @@ export const formReducers = (
     switch(action.type){
         case FormActionType.SET_ALL_ANSWERS:
             return setAllAnswers(state, action);
-        case FormActionTypes.SET_AN_ANSWER:
+        case FormActionType.SET_AN_ANSWER:
            return setAnAnswer(state, action);
         case FormActionType.CLEAR_ALL_ANSWERS:
             return clearAllAnswers(state, action);
-        case FormActionTypes.CLEAR_AN_ANSWER:
+        case FormActionType.CLEAR_AN_ANSWER:
            return clearAnAnswer(state, action);
         default:
             return state;

@@ -1,5 +1,9 @@
 export interface FormStoreType{
-    answers: Record<string, any>
+    answers: Record<string, any>;
+    clearAnswers: ()=>void;
+    clearAnAnswer: (val: string)=>void;
+    updateAnswerForQuestion: (key: string, value: any)=>void;
+    setAnswers: (answers: Record<string, any>)=>void;
 }
 
 export interface FormState{

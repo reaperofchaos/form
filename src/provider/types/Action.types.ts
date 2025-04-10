@@ -1,5 +1,4 @@
-import { EnumDictionary } from "../../utils/types/map.types"
-
+// Form dispatch action types
 export enum FormActionType{
     SET_ALL_ANSWERS = 'setAllAnswers',
     SET_AN_ANSWER = 'setAnAnswer',
@@ -7,35 +6,16 @@ export enum FormActionType{
     CLEAR_AN_ANSWER = 'clearAnAnswer'
 }
 
-export enum FormStorePayloadTypeEnum {
-    MAP = 'map',
-    KEY_VALUE_PAIR = 'keyValuePair',
-    NULL = 'null',
-    STRING = 'string'
-}
-
+// Interface with a key of action type mapped to its payload type
 export interface FormActionPayloads{
-    [FormStorePayloadTypeEnum.MAP]: Record<string, any>,
-    [FormStorePayloadTypeEnum.KEY_VALUE_PAIR]: {key: string, value: any},
-    [FormStorePayloadTypeEnum.NULL]: null
-    [FormStorePayloadTypeEnum.STRING]: string
+    [FormActionType.SET_ALL_ANSWERS]: Record<string, any>,
+    [FormActionType.SET_AN_ANSWER]: {key: string, value: any},
+    [FormActionType.CLEAR_ALL_ANSWERS]: null
+    [FormActionType.CLEAR_AN_ANSWER]: string
 }
 
-const test2: FormActionPayloads[FormStorePayloadTypeEnum.KEY_VALUE_PAIR] = "test"
-const test3: FormActionPayloads[FormStorePayloadTypeEnum.KEY_VALUE_PAIR] = {key: "", value: null}
-
-
-export const FormActionPayloadTypeDictionary: EnumDictionary<FormActionType, FormStorePayloadTypeEnum> = {
-    [FormActionType.SET_ALL_ANSWERS]: FormStorePayloadTypeEnum.MAP,
-    [FormActionType.SET_AN_ANSWER]: FormStorePayloadTypeEnum.KEY_VALUE_PAIR,
-    [FormActionType.CLEAR_ALL_ANSWERS]: FormStorePayloadTypeEnum.NULL,
-    [FormActionType.CLEAR_AN_ANSWER]: FormStorePayloadTypeEnum.STRING
-}
-
-export type FormActionPayloadType<T extends FormActionType> = FormActionPayloads[typeof FormActionPayloadTypeDictionary[T]];
-
-const test4: FormActionPayloadType<FormActionType.SET_AN_ANSWER> = {key: "", value: null}
-const test5: FormActionPayloadType<FormActionType.SET_AN_ANSWER> = "tssta"
+// Type leveraging the interface to map an enum to a type
+export type FormActionPayloadType<T extends keyof FormActionPayloads> = FormActionPayloads[T];
 
 // form action type for argument in dispatch
 export type FormAction<T extends FormActionType> ={
@@ -43,9 +23,13 @@ export type FormAction<T extends FormActionType> ={
     payload: FormActionPayloadType<T>
 }
 
-const test: FormActionPayloadType<FormActionType.SET_AN_ANSWER> = "test"
-export type FormDispatchPayloadType = FormAction<FormActionType>;
+// TODO: surely a better way
+// Possible payloads for a form dispatch action
+export type FormDispatchPayloadType = 
+| FormAction<FormActionType.CLEAR_ALL_ANSWERS> 
+| FormAction<FormActionType.CLEAR_AN_ANSWER> 
+| FormAction<FormActionType.SET_AN_ANSWER> 
+| FormAction<FormActionType.SET_ALL_ANSWERS>
 
-const myTestPayload: FormDispatchPayloadType = {type: FormActionType.CLEAR_AN_ANSWER, payload: test};
-
+// Form Provider dispatch type
 export type FormDispatch = (payload: FormDispatchPayloadType)=>void;

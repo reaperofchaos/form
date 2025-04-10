@@ -10,6 +10,7 @@ const FormProvider = ({children}: {children: ReactElement})=>{
     const [state, dispatch] = React.useReducer(formReducers, initialState)
     const value = {state, dispatch}
     
+    // sucks to have to define these actions in the provider and not somewhere else
     const setAnswers = (answers: Record<string, any>)=>{
         dispatch({
             type: FormActionType.SET_ALL_ANSWERS,
@@ -26,18 +27,24 @@ const FormProvider = ({children}: {children: ReactElement})=>{
 
     const clearAnswers = ()=>{
         dispatch({
-            type: FormActionType.CLEAR_ALL_ANSWERS
+            type: FormActionType.CLEAR_ALL_ANSWERS,
+            payload: null
         })
     }
 
-    const clearAnAnswer = ()=>{
+    const clearAnAnswer = (val: string)=>{
         dispatch({
-            type: FormActionType.CLEAR_AN_ANSWER
+            type: FormActionType.CLEAR_AN_ANSWER,
+            payload: val
         })
     }
 
     const contextValue: FormStoreType = React.useMemo(()=>({
-        answers: state.answers
+        answers: state.answers,
+        clearAnswers,
+        clearAnAnswer,
+        updateAnswerForQuestion,
+        setAnswers
     }),
     [state, dispatch])
 
