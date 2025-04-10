@@ -8,7 +8,6 @@ import { formReducers, initialState } from "./reducers";
 // crazy stuff but only ever output a map of field to answer
 const FormProvider = ({children}: {children: ReactElement})=>{
     const [state, dispatch] = React.useReducer(formReducers, initialState)
-    const value = {state, dispatch}
     
     // sucks to have to define these actions in the provider and not somewhere else
     const setAnswers = (answers: Record<string, any>)=>{
