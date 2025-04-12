@@ -19,7 +19,6 @@ function App() {
 
   const updateAnswer = (question: string, value: any)=>{
     formDispatch({type: FormActionType.SET_AN_ANSWER, payload: {key: question, value}});
-
   }
 
   const clearQuestion = (val: string)=>{
