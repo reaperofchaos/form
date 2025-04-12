@@ -1,9 +1,10 @@
+import { FormDispatchPayloadType } from "./Action.types";
+
 export interface FormStoreType{
-    answers: Record<string, any>;
-    clearAnswers: ()=>void;
-    clearAnAnswer: (val: string)=>void;
-    updateAnswerForQuestion: (key: string, value: any)=>void;
-    setAnswers: (answers: Record<string, any>)=>void;
+    store: Store<FormState>
+    state: FormState,
+    dispatch: React.ActionDispatch<[action: FormDispatchPayloadType]>,
+    useSelector: (selector: (state: FormState) => any) => any
 }
 
 export interface FormState{
@@ -12,3 +13,8 @@ export interface FormState{
 }
 
 export type FormContextType = React.Context<FormStoreType>;
+
+export type Store<T> = { getState: ()=>T, 
+    setState: (state: T)=>void, 
+    subscribe: (listener: any) => () => boolean 
+}

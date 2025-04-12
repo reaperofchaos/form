@@ -1,50 +1,58 @@
-import { useContext, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useContext, useEffect } from 'react'
 import './App.css'
 import { FormContext } from './provider/FormContext'
+import { FormActionType, FormStoreType } from './provider/types'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const {answers, setAnswers, updateAnswerForQuestion, clearAnAnswer, clearAnswers} = useContext(FormContext);
+  const {dispatch: formDispatch, useSelector} = useContext(FormContext) as FormStoreType;
 
+  const answers = useSelector((state)=>state.answers);
   const test: Record<string, any> = {question1: "yes", question2: "no", question3: "This is a test", question4: true, question5: 42}
   
-  setAnswers(test);
-  console.log("answers", answers);
+  useEffect(()=>{
+    formDispatch({type: FormActionType.SET_ALL_ANSWERS, payload: test});
+  }, [])
+  
+  const resetForm = (formResult: Record<string, any>)=>{
+    formDispatch({type: FormActionType.SET_ALL_ANSWERS, payload: formResult})  
+  }
 
-  updateAnswerForQuestion({key: "question5", value: 7})
-  console.log("answers", answers);
+  const updateAnswer = (question: string, value: any)=>{
+    formDispatch({type: FormActionType.SET_AN_ANSWER, payload: {key: question, value}});
 
-  // clearAnAnswer("question1");
-  // console.log("answers", answers);
+  }
 
-  // clearAnswers();
-  // console.log("answers", answers)
+  const clearQuestion = (val: string)=>{
+    formDispatch({type: FormActionType.CLEAR_AN_ANSWER, payload: val})
+  }
 
+  const clearAll = ()=>{
+    formDispatch({type: FormActionType.CLEAR_ALL_ANSWERS, payload: null})
+  }
+
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div style={{display: 'flex', flexDirection: 'column', rowGap: '20px'}}>
+        <div style={{display: 'flex', flexDirection: 'row', columnGap: '10px'}}>
+        <label>Question 1</label>
+        <input type="text" value={answers?.question1 ?? ""} onChange={(e)=>updateAnswer("question1", e.target.value)} />
+        <button onClick={()=>clearQuestion("question1")}>clear</button>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'row', columnGap: '10px'}}>
+        <label>Question 2</label>
+        <input type="text" value={answers?.question2 ?? ""} onChange={(e)=>updateAnswer("question2", e.target.value)} />
+        <button onClick={()=>clearQuestion("question2")}>clear</button>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'row', columnGap: '10px'}}>
+        <label>Question 3</label>
+        <input type="text" value={answers?.question3 ?? ""} onChange={(e)=>updateAnswer("question3", e.target.value)} />
+        <button onClick={()=>clearQuestion("question3")}>clear</button>
+        </div>
+        <div style={{display: 'flex', flexDirection: 'row', columnGap: '10px'}}>
+          <button onClick={()=>resetForm(test)}>Reset All Answers</button>
+          <button onClick={()=>clearAll()}>Clear All Answers</button>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
   )
 }
 
