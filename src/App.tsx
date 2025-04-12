@@ -1,11 +1,11 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import './App.css'
-import { FormContext } from './provider/FormContext'
-import { FormActionType, FormStoreType } from './provider/types'
+import { useFormProvider } from './provider/FormContext'
+import { FormActionType } from './provider/types'
 
 function App() {
-  const {dispatch: formDispatch, useSelector} = useContext(FormContext) as FormStoreType;
-
+  const {dispatch: formDispatch, useSelector} = useFormProvider();
+  const state = useSelector((state)=>state);
   const answers = useSelector((state)=>state.answers);
   const test: Record<string, any> = {question1: "yes", question2: "no", question3: "This is a test", question4: true, question5: 42}
   
@@ -29,9 +29,12 @@ function App() {
     formDispatch({type: FormActionType.CLEAR_ALL_ANSWERS, payload: null})
   }
 
-  
   return (
       <div style={{display: 'flex', flexDirection: 'column', rowGap: '20px'}}>
+        <div style={{display: 'flex', flexDirection: 'row', columnGap: '10px'}}>
+          <label>Store </label>
+          <p style={{width: '200px', height: '200px'}}>{JSON.stringify(state)}</p>
+        </div>
         <div style={{display: 'flex', flexDirection: 'row', columnGap: '10px'}}>
         <label>Question 1</label>
         <input type="text" value={answers?.question1 ?? ""} onChange={(e)=>updateAnswer("question1", e.target.value)} />

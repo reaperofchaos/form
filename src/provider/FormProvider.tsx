@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { FormActionType, FormState, FormStoreType, Store } from "./types";
+import { FormState, FormStoreType, Store } from "./types";
 import React from "react";
 import { FormContext } from "./FormContext";
 import { formReducers, initialState } from "./reducers";
@@ -19,8 +19,6 @@ const FormProvider = ({children}: {children: ReactElement})=>{
         dispatch,
         useSelector,
     }
-
-
 
     if(contextValue){
         return (

@@ -7,7 +7,7 @@ import { Store } from "../types";
         let state = initialState;
         const getState = () => state;
         const listeners = new Set<() => boolean>();
-        // @ts-ignore until I figure out the best way to to ensure dispatches are generic
+        // @ts-expect-error until I figure out the best way to to ensure dispatches are generic
         const setState = (fn) => {
           state = fn(state);
           listeners.forEach((listener) => listener());
