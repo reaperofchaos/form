@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material"
-import { useFormProvider } from "../../../provider/FormContext";
+import { useFormProvider } from "../../provider/FormContext";
 import { TextComponentProps } from "../../types/field.types";
-import { FormActionType } from "../../../provider/types";
+import { FormActionType } from "../../provider/types";
 
 const TextComponent = (props: TextComponentProps)=>{    
     const label = props.id;

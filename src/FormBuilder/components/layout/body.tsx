@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
-import { Field } from "../../types/formbuilder.types";
 import { FormLayout } from "../../types/layout.types";
 import { ComponentSelector } from "../ComponentSelector";
+import { FieldPropTypes } from "../../types/field.types";
 
-const Body = ({fields, layout, readOnly}: {fields: Record<string, Field>, layout?: FormLayout, readOnly: boolean})=>{
+const Body = ({fields, layout, readOnly}: {fields: Record<string, FieldPropTypes>, layout?: FormLayout, readOnly: boolean})=>{
     const fieldArray = Object.values(fields);
 
     return (

@@ -1,9 +1,9 @@
-import FormProvider from "../../provider/FormProvider"
+import FormProvider from "../provider/FormProvider"
 import { FormBuilderProps } from "../types/formbuilder.types";
 import FormBuilderContent from "./FormBuilderContent";
 
 const FormBuilder = (form: FormBuilderProps)=>
-    (<FormProvider>
+    (<FormProvider options={form?.options}>
         <FormBuilderContent form={form}/>
     </FormProvider>);
 

@@ -4,9 +4,9 @@ import Footer from "./layout/footer";
 import Header from "./layout/header";
 import Body from "./layout/body";
 import { useEffect } from "react";
-import { useFormProvider } from "../../provider/FormContext";
+import { useFormProvider } from "../provider/FormContext";
 import ReactDndWrapper from "./ReactDndWrapper";
-import { FormActionType } from "../../provider/types";
+import { FormActionType } from "../provider/types";
 
 const FormBuilderContent = ({form}: {form: FormBuilderProps})=>{
     const hasDragging: boolean = form?.hasDragging ?? false;
@@ -22,8 +22,6 @@ const FormBuilderContent = ({form}: {form: FormBuilderProps})=>{
     useEffect(()=>{
         getFormValues(answers)
     }, [answers])
-
-
 
     return (
         <ReactDndWrapper hasDragging={hasDragging}>

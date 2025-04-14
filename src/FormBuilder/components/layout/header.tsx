@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import { Field } from "../../types/formbuilder.types";
 import { FormLayout } from "../../types/layout.types";
+import { FieldPropTypes } from "../../types/field.types";
 
-const Header = ({fields, layout, readOnly}: {fields: Record<string, Field>, layout?: FormLayout, readOnly: boolean})=>{
+const Header = ({fields, layout, readOnly}: {fields: Record<string, FieldPropTypes>, layout?: FormLayout, readOnly: boolean})=>{
     if(!layout){
         return <></>; 
     }

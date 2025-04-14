@@ -1,3 +1,4 @@
+import { DropdownProps } from "../../../utils";
 import { FormDispatchPayloadType } from "./Action.types";
 
 export interface FormStoreType{
@@ -10,6 +11,8 @@ export interface FormStoreType{
 export interface FormState{
     // store the answers of a form
     answers: Record<string, any>,
+    // options
+    options: Record<string, DropdownProps[]>
 }
 
 export type FormContextType = React.Context<FormStoreType>;

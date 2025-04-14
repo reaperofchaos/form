@@ -1,5 +1,7 @@
-import { AuditingType } from "../../utils";
+import { AuditingType, DropdownProps } from "../../utils";
+import { FieldPropTypes } from "./field.types";
 import { FormLayout } from "./layout.types"
+import {Parameters} from "./parameter.types"
 
 export interface FormBuilderProps extends Form{
     // form displays read only variant
@@ -10,6 +12,8 @@ export interface FormBuilderProps extends Form{
     getFormValues: (values: Record<string, any>)=>void;
     // answers
     answers: Record<string, any>
+    // option map for dynamic types
+    options?: Record<string, DropdownProps[]>
 }
 
 export interface Form extends AuditingType<string>{
@@ -20,7 +24,7 @@ export interface Form extends AuditingType<string>{
     // name of form
     name: string;
     // fields on a form
-    fields: Record<string, Field>
+    fields: Record<string, FieldPropTypes>
     // header position slot, always vertically at top of form, default is non-existent
     header?: FormLayout;
     // body position slot, if not provided default is a column with all fields
@@ -43,10 +47,13 @@ export  interface Field extends AuditingType<string>{
 export interface FieldProp<T extends FieldType> extends Field {
     // type
     type: T;
+    // parameters
+    parameters: Parameters<T>
 }
 
 
 export enum FieldType{
-    TEXT = "text"
+    TEXT = "text",
+    DROPDOWN = "dropdown"
 }
 
