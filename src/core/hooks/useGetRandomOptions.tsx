@@ -3,8 +3,37 @@ import { DropdownProps } from "../../utils";
 import { useDispatch } from "react-redux";
 import { setRandomOptions } from "../reducers/core.reducers";
 
-const useGetRandomOptions = ()=>{
-    const randomOptions: DropdownProps[] = [{
+const useGetRandomOptions = (language: string)=>{
+
+    const englishOptions: DropdownProps[] = [
+        {
+            label: "one",
+            value: 1,
+            position: 0
+        },
+        {
+            label: "two",
+            value: 2,
+            position: 1
+        },
+        {
+            label: "three",
+            value: 3,
+            position: 2
+        },
+        {
+            label: "four",
+            value: 4,
+            position: 3
+        },
+        {
+            label: "five",
+            value: 5,
+            position: 4
+        }
+    ];
+
+    const japaneseOptions: DropdownProps[] = [{
         label: "ichi",
         value: 1,
         position: 0
@@ -33,8 +62,9 @@ const useGetRandomOptions = ()=>{
 const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(setRandomOptions(randomOptions))
-    }, [])
+        const optionsToUse = language === "English" ? englishOptions : japaneseOptions;
+        dispatch(setRandomOptions(optionsToUse))
+    }, [language])
 }
 
 export default useGetRandomOptions;
