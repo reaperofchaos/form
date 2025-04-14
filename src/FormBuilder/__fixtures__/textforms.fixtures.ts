@@ -59,6 +59,24 @@ export const TextForm: Form = {
                     },
                 ]
             }
+        },
+        question6: {
+            type: FieldType.RADIO_BOOLEAN,
+            name: "Question 6",
+            id: 'question6',
+            required: false,
+            parameters: {
+                booleanLabels: ["hai", "ie"]
+            }
+        },
+        question7: {
+            type: FieldType.RADIO,
+            name: "Question 7",
+            id: 'question7',
+            required: false,
+            parameters: {
+                optionName: DROPDOWN_OPTION_TYPE.RANDOM,
+                options: undefined            }
         }
     }
 }

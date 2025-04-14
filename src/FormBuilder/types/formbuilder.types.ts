@@ -54,6 +54,8 @@ export interface FieldProp<T extends FieldType> extends Field {
 
 export enum FieldType{
     TEXT = "text",
-    DROPDOWN = "dropdown"
+    DROPDOWN = "dropdown",
+    RADIO_BOOLEAN = "radio_boolean",
+    RADIO = "radio"
 }
 

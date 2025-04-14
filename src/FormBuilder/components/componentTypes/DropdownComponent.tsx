@@ -22,9 +22,10 @@ const DropdownComponent = (props: DropdownComponentProps)=>{
     
     return (
             <TextField
+            
                 value={value ?? ""}
                 label={label}
-                id={`${id}-dropdown`}
+                id={`${id}-${props.type}`}
                 select
                 onChange={handleChange}
             >

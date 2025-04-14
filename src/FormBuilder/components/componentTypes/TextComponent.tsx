@@ -15,7 +15,7 @@ const TextComponent = (props: TextComponentProps)=>{
     }
 
     return (
-        <TextField id="outlined-basic" label={props.name} onChange={onChange} value={value ?? ""}/>
+        <TextField id={`${props.id}-${props.type}`} label={props.name} onChange={onChange} value={value ?? ""}/>
     )
 }
 
