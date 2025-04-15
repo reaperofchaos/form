@@ -13,20 +13,24 @@ const TestFormComponent = ({name}: {name: string})=>{
     const [formAnswers, setFormAnswers] = useState<Record<string, any>>()
     const initialAnswers: Record<string, any> = {question1: "yes", question2: "no", question3: "This is a test", question4: 1, question5: 2}
     const randomOptions = useSelector(selectRandomOptions);
-    const randomFunction = ()=>{
-        if(language === "English"){
-            setLanguage("Japanese")
-        }
-
-        if(language === "Japanese"){
-            setLanguage("English")
-        }
-
-    }
+    
     // form builder doesn't care where the options come from as long as they fit the type
     // app should be responsible for getting the data
     const options = useMemo(()=>({[DROPDOWN_OPTION_TYPE.RANDOM]: randomOptions}), [randomOptions]);
-    const functions = useMemo(()=>({[FUNCTION_OPTION_TYPE.RANDOM_FUNCTION]: randomFunction }), [randomFunction]);
+    
+    // ditto to the above with functions as long as they take no arguments and return no values
+    const functions = useMemo(()=>{
+        const randomFunction = ()=>{
+            if(language === "English"){
+                setLanguage("Japanese")
+            }
+    
+            if(language === "Japanese"){
+                setLanguage("English")
+            }
+    
+        }
+        return {[FUNCTION_OPTION_TYPE.RANDOM_FUNCTION]: randomFunction }}, [language]);
 
     useGetRandomOptions(language);
 

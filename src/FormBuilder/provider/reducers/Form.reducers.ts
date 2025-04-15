@@ -1,5 +1,5 @@
+import _ from "lodash";
 import { FormAction, FormActionType, FormDispatchPayloadType, FormState } from "../types";
-import _, { functions } from 'lodash';
 
 export const initialState: FormState = {
     answers: {},
