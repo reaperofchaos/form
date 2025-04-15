@@ -14,6 +14,8 @@ export interface FormBuilderProps extends Form{
     answers: Record<string, any>
     // option map for dynamic types
     options?: Record<string, DropdownProps[]>
+    // function map for dynamic types
+    functions?: Record<string, ()=>void>
 }
 
 export interface Form extends AuditingType<string>{
@@ -56,6 +58,9 @@ export enum FieldType{
     TEXT = "text",
     DROPDOWN = "dropdown",
     RADIO_BOOLEAN = "radio_boolean",
-    RADIO = "radio"
+    RADIO = "radio",
+    AUTOCOMPLETE = 'autocomplete',
+    MULTISELECT = 'multiselect',
+    BUTTON = 'button'
 }
 

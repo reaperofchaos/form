@@ -17,11 +17,12 @@ const FormBuilderContent = ({form}: {form: FormBuilderProps})=>{
 
     useEffect(()=>{
         dispatch({type: FormActionType.SET_ALL_ANSWERS, payload: form.answers})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(()=>{
         getFormValues(answers)
-    }, [answers])
+    }, [answers, getFormValues])
 
     return (
         <ReactDndWrapper hasDragging={hasDragging}>

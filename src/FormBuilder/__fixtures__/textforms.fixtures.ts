@@ -77,6 +77,33 @@ export const TextForm: Form = {
             parameters: {
                 optionName: DROPDOWN_OPTION_TYPE.RANDOM,
                 options: undefined            }
+        },
+        question8: {
+            type: FieldType.AUTOCOMPLETE,
+            name: "Question 8",
+            id: 'question8',
+            required: false,
+            parameters: {
+                optionName: DROPDOWN_OPTION_TYPE.RANDOM,
+                options: undefined            }
+        },
+        question9: {
+            type: FieldType.MULTISELECT,
+            name: "Question 9",
+            id: 'question9',
+            required: false,
+            parameters: {
+                optionName: DROPDOWN_OPTION_TYPE.RANDOM,
+                options: undefined            }
+        },
+        button1: {
+            type: FieldType.BUTTON,
+            name: "Random Button",
+            id: 'button1',
+            required: false,
+            parameters: {
+                functionName: "randomFunction"
+            }
         }
     }
 }

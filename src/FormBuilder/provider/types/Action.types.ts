@@ -9,7 +9,11 @@ export enum FormActionType{
     SET_ALL_OPTIONS = 'setAllOptions',
     SET_AN_OPTION = 'setAnOption',
     CLEAR_AN_OPTION = 'clearAnOption',
-    CLEAR_ALL_OPTIONS = 'clearAllOptions'
+    CLEAR_ALL_OPTIONS = 'clearAllOptions',
+    SET_ALL_FUNCTIONS = 'setAllFunctions',
+    SET_A_FUNCTION = 'setAFunction',
+    CLEAR_ALL_FUNCTIONS = 'clearAllFunctions',
+    CLEAR_A_FUNCTION = 'clearAFunction'
 }
 
 // Interface with a key of action type mapped to its payload type
@@ -22,6 +26,10 @@ export interface FormActionPayloads{
     [FormActionType.SET_AN_OPTION]: {key: string, value: DropdownProps[]}
     [FormActionType.CLEAR_AN_OPTION]: string,
     [FormActionType.CLEAR_ALL_OPTIONS]: null
+    [FormActionType.SET_ALL_FUNCTIONS]: Record<string, ()=>void>,
+    [FormActionType.SET_A_FUNCTION]: {key: string, value: ()=>void},
+    [FormActionType.CLEAR_ALL_FUNCTIONS]: null,
+    [FormActionType.CLEAR_A_FUNCTION]: string,
 }
 
 // Type leveraging the interface to map an enum to a type
@@ -44,6 +52,10 @@ export type FormDispatchPayloadType =
 | FormAction<FormActionType.SET_AN_OPTION>
 | FormAction<FormActionType.CLEAR_ALL_OPTIONS>
 | FormAction<FormActionType.CLEAR_AN_OPTION>
+| FormAction<FormActionType.SET_ALL_FUNCTIONS>
+| FormAction<FormActionType.SET_A_FUNCTION>
+| FormAction<FormActionType.CLEAR_ALL_FUNCTIONS>
+| FormAction<FormActionType.CLEAR_A_FUNCTION>
 
 // Form Provider dispatch type
 export type FormDispatch = (payload: FormDispatchPayloadType)=>void;

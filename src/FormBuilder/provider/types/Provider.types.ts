@@ -13,6 +13,8 @@ export interface FormState{
     answers: Record<string, any>,
     // options
     options: Record<string, DropdownProps[]>
+    // functions
+    functions: Record<string, ()=>void>
 }
 
 export type FormContextType = React.Context<FormStoreType>;

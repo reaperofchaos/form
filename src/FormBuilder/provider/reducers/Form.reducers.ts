@@ -1,9 +1,10 @@
 import { FormAction, FormActionType, FormDispatchPayloadType, FormState } from "../types";
-import _ from 'lodash';
+import _, { functions } from 'lodash';
 
 export const initialState: FormState = {
     answers: {},
-    options: {}
+    options: {},
+    functions: {}
 }
 
 const setAllAnswers = (state: FormState, action: FormAction<FormActionType.SET_ALL_ANSWERS>)=>{
@@ -43,7 +44,7 @@ const setAnOption = (state: FormState, action: FormAction<FormActionType.SET_AN_
 }
 
 const clearAllOptions = (state: FormState)=>{
-    return {...state, answers: {}}
+    return {...state, options: {}}
 }
 
 const clearAnOption = (state: FormState, action: FormAction<FormActionType.CLEAR_AN_OPTION>)=>{
@@ -52,6 +53,30 @@ const clearAnOption = (state: FormState, action: FormAction<FormActionType.CLEAR
     delete options?.[key];
 
     return {...state, options}
+}
+
+const setAllFunctions = (state: FormState, action: FormAction<FormActionType.SET_ALL_FUNCTIONS>)=>{
+    return  {...state, functions: action.payload};
+}
+
+const setAFunction = (state: FormState, action: FormAction<FormActionType.SET_A_FUNCTION>)=>{
+    const {key, value} = action.payload;
+    const functions = _.cloneDeep(state.functions);
+    functions[key] = value;
+
+    return {...state, functions};
+}
+
+const clearAllFunctions = (state: FormState)=>{
+    return {...state, functions: {}}
+}
+
+const clearAFunction = (state: FormState, action: FormAction<FormActionType.CLEAR_A_FUNCTION>)=>{
+    const key = action.payload;
+    const functions = _.cloneDeep(state.functions);
+    delete functions?.[key];
+
+    return {...state, functions}
 }
 
 
@@ -76,6 +101,14 @@ export const formReducers = (
             return clearAllOptions(state)
         case FormActionType.CLEAR_AN_OPTION:
             return clearAnOption(state, action)
+        case FormActionType.SET_ALL_FUNCTIONS:
+            return setAllFunctions(state, action);
+        case FormActionType.SET_A_FUNCTION:
+            return setAFunction(state, action);
+        case FormActionType.CLEAR_ALL_FUNCTIONS:
+            return clearAllFunctions(state);
+        case FormActionType.CLEAR_A_FUNCTION:
+            return clearAFunction(state, action)
         default:
             return state;
     }
