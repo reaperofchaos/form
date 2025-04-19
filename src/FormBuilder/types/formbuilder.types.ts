@@ -10,6 +10,8 @@ export interface FormBuilderProps extends Form{
     hasDragging?: boolean; 
     // function to return state values to outside
     getFormValues: (values: Record<string, any>)=>void;
+    // function to return if form is answered
+    getIsAnswered?: (value: {isAnswered: boolean, reasonText?: string})=>void;
     // answers
     answers: Record<string, any>
     // option map for dynamic types
@@ -44,6 +46,10 @@ export  interface Field extends AuditingType<string>{
     type: FieldType;
     // is required field
     required: boolean;
+    // visible but not clickable
+    disabled: boolean;
+    // not visible and also not clickable
+    hidden: boolean;
 }
 
 export interface FieldProp<T extends FieldType> extends Field {

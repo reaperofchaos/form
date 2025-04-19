@@ -1,5 +1,6 @@
 import { DropdownProps } from "../../../utils";
 import { FormDispatchPayloadType } from "./Action.types";
+import { FormFieldState } from "./Validation.types";
 
 export interface FormStoreType{
     store: Store<FormState>
@@ -15,6 +16,8 @@ export interface FormState{
     options: Record<string, DropdownProps[]>
     // functions
     functions: Record<string, ()=>void>
+    // state of form
+    formFieldState: FormFieldState
 }
 
 export type FormContextType = React.Context<FormStoreType>;

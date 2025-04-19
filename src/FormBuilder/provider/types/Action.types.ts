@@ -1,4 +1,5 @@
 import { DropdownProps } from "../../../utils";
+import { FieldState, FormFieldState } from "./Validation.types";
 
 // Form dispatch action types
 export enum FormActionType{
@@ -13,7 +14,10 @@ export enum FormActionType{
     SET_ALL_FUNCTIONS = 'setAllFunctions',
     SET_A_FUNCTION = 'setAFunction',
     CLEAR_ALL_FUNCTIONS = 'clearAllFunctions',
-    CLEAR_A_FUNCTION = 'clearAFunction'
+    CLEAR_A_FUNCTION = 'clearAFunction',
+    SET_FORM_FIELD_STATE = 'setFormFieldState',
+    UPDATE_FORM_FIELD_STATE = 'updateFormFieldState',
+    CLEAR_FORM_FIELD_STATE = 'clearFormFieldState',
 }
 
 // Interface with a key of action type mapped to its payload type
@@ -30,6 +34,9 @@ export interface FormActionPayloads{
     [FormActionType.SET_A_FUNCTION]: {key: string, value: ()=>void},
     [FormActionType.CLEAR_ALL_FUNCTIONS]: null,
     [FormActionType.CLEAR_A_FUNCTION]: string,
+    [FormActionType.SET_FORM_FIELD_STATE]: FormFieldState,
+    [FormActionType.UPDATE_FORM_FIELD_STATE]: {key: string, value: FieldState},
+    [FormActionType.CLEAR_FORM_FIELD_STATE]: null
 }
 
 // Type leveraging the interface to map an enum to a type
@@ -56,6 +63,9 @@ export type FormDispatchPayloadType =
 | FormAction<FormActionType.SET_A_FUNCTION>
 | FormAction<FormActionType.CLEAR_ALL_FUNCTIONS>
 | FormAction<FormActionType.CLEAR_A_FUNCTION>
+| FormAction<FormActionType.SET_FORM_FIELD_STATE>
+| FormAction<FormActionType.UPDATE_FORM_FIELD_STATE>
+| FormAction<FormActionType.CLEAR_FORM_FIELD_STATE>
 
 // Form Provider dispatch type
 export type FormDispatch = (payload: FormDispatchPayloadType)=>void;

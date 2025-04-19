@@ -11,6 +11,8 @@ import { FUNCTION_OPTION_TYPE } from "./core/types/function.types";
 const TestFormComponent = ({name}: {name: string})=>{
     const [language, setLanguage] = useState("Japanese")
     const [formAnswers, setFormAnswers] = useState<Record<string, any>>()
+    const [canSubmit, setCanSubmit] = useState<string | undefined>();
+
     const initialAnswers: Record<string, any> = {question1: "yes", question2: "no", question3: "This is a test", question4: 1, question5: 2}
     const randomOptions = useSelector(selectRandomOptions);
     
@@ -38,11 +40,17 @@ const TestFormComponent = ({name}: {name: string})=>{
         setFormAnswers(value)
     }
 
+    const getIsAnswered = (value: {isAnswered: boolean, reasonText?: string})=>{
+        console.log('value', value);
+        setCanSubmit(value?.reasonText)
+    }
+
     return (<Box>
             <Button onClick={()=>setLanguage("English")}>English</Button>
             <Button onClick={()=>setLanguage("Japanese")}>Japanese</Button>
-        <FormBuilder getFormValues={getFormValues} {...TextForm} answers={initialAnswers} options={options} functions={functions}/>
+        <FormBuilder getFormValues={getFormValues} getIsAnswered={getIsAnswered} {...TextForm} answers={initialAnswers} options={options} functions={functions}/>
         <Box>{name} - {JSON.stringify(formAnswers)}</Box>
+            <Box>Can submit: {canSubmit ? "No" : "Yes"} {canSubmit ? `Reason: ${canSubmit}`: ""} </Box>
         </Box>);
 }
 

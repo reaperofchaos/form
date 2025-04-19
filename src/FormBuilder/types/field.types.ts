@@ -1,4 +1,5 @@
 import { Optional } from "../../utils";
+import { FormActionType } from "../provider/types";
 import { FieldProp, FieldType } from "./formbuilder.types";
 
 export type AnswerType = 
@@ -10,6 +11,16 @@ export type AnswerType =
 | AutocompleteAnswerType
 | MultiselectComponentAnswerType;
 
+export interface AnswerTypeOptions{
+    [FieldType.TEXT]: TextAnswerType,
+    [FieldType.DROPDOWN]: DropdownAnswerType,
+    [FieldType.RADIO_BOOLEAN]: RadioBooleanAnswerType,
+    [FieldType.RADIO]: RadioAnswerType,
+    [FieldType.AUTOCOMPLETE]: AutocompleteAnswerType,
+    [FieldType.MULTISELECT]: MultiselectComponentAnswerType
+    [FieldType.BUTTON]: null;
+}
+
 export type TextAnswerType = Optional<string>
 export type NumberAnswerType = Optional<number>
 export type DropdownAnswerType = Optional<string | number>;
@@ -17,6 +28,8 @@ export type RadioBooleanAnswerType = Optional<boolean>;
 export type RadioAnswerType = Optional<string | number>;
 export type AutocompleteAnswerType = Optional<string | number>;
 export type MultiselectComponentAnswerType = Optional<string[] | number[]>;
+
+export type Answer<T extends keyof AnswerTypeOptions> = AnswerTypeOptions[T]
 
 export type TextComponentProps = FieldProp<FieldType.TEXT>;
 export type DropdownComponentProps =FieldProp<FieldType.DROPDOWN>
