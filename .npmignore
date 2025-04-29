@@ -1,0 +1,20 @@
+coverage
+debug.log
+npm.log
+storybook
+documentation
+node_modules
+.eslintrc
+jest.config.ts
+prettier.config.js
+test.txt
+tsconfig.json
+tsconfig.build.json
+Component Library.xd
+.storybook
+.eslintignore
+.eslintrc.js
+.gitlab-ci.yml
+README.md
+*.tgz
+test.txt

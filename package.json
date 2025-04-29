@@ -1,0 +1,36 @@
+{
+  "name": "form-builder-2-lib",
+  "version": "1.0.0",
+  "description": "",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src/Themes/theme.d.ts"
+  ],
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ./dist && tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.0.0",
+    "@types/react": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dnd": "^16.0.0",
+    "react-dnd-html5-backend": "^16.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.16",
+    "i": "^0.3.7",
+    "npm": "^11.3.0"
+  }
+}
