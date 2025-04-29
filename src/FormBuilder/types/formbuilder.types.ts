@@ -1,5 +1,5 @@
 import { AuditingType, DropdownProps } from "../../utils";
-import { FieldPropTypes } from "./field.types";
+import { Answer, FieldPropTypes } from "./field.types";
 import { FormLayout } from "./layout.types"
 import {Parameters} from "./parameter.types"
 
@@ -57,11 +57,15 @@ export interface FieldProp<T extends FieldType> extends Field {
     type: T;
     // parameters
     parameters: Parameters<T>
+
+    // optional onChange
+    customOnChange?: (val: Answer<T>)=>void;
 }
 
 
 export enum FieldType{
     TEXT = "text",
+    TEXT_GROUP = 'text_group',
     DROPDOWN = "dropdown",
     RADIO_BOOLEAN = "radio_boolean",
     RADIO = "radio",

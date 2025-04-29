@@ -5,13 +5,22 @@ import { FormActionType } from "../../provider/types";
 
 const TextComponent = (props: TextComponentProps)=>{    
     const label = props.id;
+    const customOnChange = props.customOnChange;
     const {useSelector, dispatch} = useFormProvider();
     const value = useSelector((state)=>state.answers?.[label]);
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
         const currentValue = event.target.value;
 
-        dispatch({type: FormActionType.SET_AN_ANSWER, payload: {key: label, value: currentValue}})
+        if(customOnChange){
+            customOnChange(currentValue);
+        }
+        
+        if(!customOnChange){
+            dispatch({type: FormActionType.SET_AN_ANSWER, payload: {key: label, value: currentValue}})
+        }
+        
+       
     }
 
     return (
